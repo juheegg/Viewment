@@ -14,11 +14,11 @@
   </v-row>
   <!-- 데이터 요청이 완료되지 않았다면 로딩화면 끝-->
 
-
   <v-row 
     v-else
     justify="center"
-    class="scroll-container">
+    class="scroll-container"
+  >
     <v-col lg="4" md="4" sm="6">
       
       <!-- 게시물 헤더 부분 시작 -->
@@ -169,7 +169,6 @@
         </v-card-text>
         <!-- 게시글 내용 끝 -->
 
-<<<<<<< frontend/src/views/article/DetailArticle.vue
         <!-- 게시글 좋아요 수, 스크랩 수 -->
         <v-card-actions class="pa-1">
 
@@ -204,31 +203,31 @@
           <v-btn small text class="text-caption">스크랩 {{0}} 개</v-btn> 
         </v-card-actions>
         <!-- 게시글 좋아요 수, 스크랩 수 -->
-=======
-        <v-card-text class="pa-1 text-caption">
-          좋아요 <span> {{articleInfo.likes}}</span>개  스크랩 <span> {{0}}</span>개
-        </v-card-text>
->>>>>>> frontend/src/views/article/DetailArticle.vue
-
-      <v-divider class="pb-2"></v-divider>
-      </v-card>
 
       <v-text-field
         v-model="commentInput"
-        class="bottom-comment-input ma-0 pa-0"
+        class="ma-0 pa-1"
         label="댓글 달기"
         append-icon="mdi-pencil"
+        dense
         outlined
         hide-details
         @click:append="onCreateReply"
         @keypress.enter="onCreateReply"
       ></v-text-field>
-      <ReplyList 
+      <ReplyList
+        v-if="articleInfo.replies.length > 0"
         :replies="articleInfo.replies"
         :profileUserId="articleInfo.user.userId"
         :loginUserId="loginUserId"
         replyType="reply"
       />
+      <p 
+        v-else
+        class="text-caption pa-2"
+      >아직 댓글이 없어요... 첫 댓글을 달아주세요</p>
+      </v-card>
+
     </v-col>
   </v-row>
 </template>
@@ -273,7 +272,6 @@ export default {
       commentInput: '',
       loading: true,
       imageServerPrefix: `${SERVER_URL}/images/`,
-      commentInput: '',
       articleInfo: '',
       loginUserId: '',
     }
@@ -332,7 +330,6 @@ export default {
     },
     onCreateReply() {
       if (this.commentInput) {
-        console.log(this.articleInfo.articleId)
         const params = {
           'articleId': this.articleInfo.articleId, 
           'contents': this.commentInput, 
@@ -348,7 +345,8 @@ export default {
         })
         .catch(() => {
         })
-      },
+      }
+    },
     onProfileImage() {
       this.$router.push({ 
         name: 'Profile', 
@@ -362,22 +360,23 @@ export default {
     },
     onLikeButton() {
       if (this.articleInfo.liked) {
-        axios.delete(`${SERVER_URL}/articles/${this.articleId}/unlike`, this.getToken )
+        axios.delete(`${SERVER_URL}/articles/${this.articleId}/unlike`, this.getToken)
         .then(res => {
           this.articleInfo.liked = !this.articleInfo.liked
           this.articleInfo.likes -= 1 
         })
         .catch(err => {
-          
+          console.log(err)
         })
       } else {
-        axios.post(`${SERVER_URL}/articles/${this.articleId}/like`, this.getToken )
+        axios.post(`${SERVER_URL}/articles/${this.articleId}/like`, this.getToken)
         .then(res => {
           this.articleInfo.liked = !this.articleInfo.liked
           this.articleInfo.likes += 1 
         })
         .catch(err => {
-          
+          console.log(err)
+
         })
       }
     }
@@ -408,9 +407,11 @@ export default {
   z-index: 1;
 }
 
+/* 컨테이너를 relative position으로 바꾼다. */
 .relative-container {
   position: relative
 }
+
 
 .bottom-comment-input {
   position: fixed;
@@ -418,7 +419,7 @@ export default {
   left: 0;
   background: white;
   width: 100%;
-  z-index: 4;
+  z-index: 5;
 }
 
 .mouse-hover:hover {

@@ -18,6 +18,7 @@ import CreateArticleMap from './views/article/CreateArticleMap.vue'
 import DetailArticle from './views/article/DetailArticle.vue'
 import UpdateArticle from './views/article/UpdateArticle.vue'
 import BindArticle from './views/article/BindArticle.vue'
+import Curation from './views/curation/Curation.vue'
 
 export default [
     {
@@ -136,5 +137,11 @@ export default [
         name : 'CreateArticleMap',
         meta : { title: '게시물 생성'},
         component : CreateArticleMap,
+    },  
+    {
+        path : '/curation',
+        name : 'Curation',
+        meta : { title: '게시물 추천'},
+        component : Curation,
     },  
 ]
