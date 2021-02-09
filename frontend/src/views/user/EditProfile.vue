@@ -17,22 +17,21 @@
     > 
       <div class="d-flex justify-center">
         <div>
-          <v-card
-          elevation="0"
+          <div
+            class="relative-container"
           > 
             <v-avatar
-              v-if="this.profileImageUrl"
-              size="150"
+              size="9rem"
             >
               <img
+                v-if="profileImageUrl"
                 :src="profileImageUrl"
               >
+              <img
+                v-else
+                src="@/assets/images/account.png"
+              >
             </v-avatar>
-            <v-icon
-              v-else
-              color="primary"
-              size="160"
-            >mdi-account-circle</v-icon>
 
             <!-- 프로필 삭제 버튼 시작 -->
             <v-btn
@@ -48,7 +47,7 @@
               </v-icon>
             </v-btn>
             <!-- 프로필 삭제 버튼 끝 -->
-          </v-card>
+          </div>
 
           <div class="d-flex justify-center my-4">
             <!-- <input type="file" ref="file" hidden>
@@ -287,4 +286,9 @@ export default {
     bottom: 0px; 
     right: 0px;
   }
+
+/* 컨테이너를 relative position으로 바꾼다. */
+.relative-container {
+  position: relative
+}
 </style>

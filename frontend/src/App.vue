@@ -127,7 +127,7 @@ export default {
     goFeed() {
       const token = sessionStorage.getItem('jwt')
       if (token) {
-        this.$router.push({ name: 'Feed' })
+        this.$router.push({ name: 'NewsFeed' })
         .catch (err=>{
         if(err.name === "NavigationDuplicated" ){
           location.reload();

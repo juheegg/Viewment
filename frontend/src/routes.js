@@ -4,7 +4,7 @@ import ConfirmEmail from './views/user/ConfirmEmail.vue'
 import Error from './views/error/Error.vue'
 import NotFound from './views/error/NotFound.vue'
 import ChangePassword from './views/user/ChangePassword.vue'
-import Feed from './views/feed/Feed.vue'
+import NewsFeed from './views/newsfeed/NewsFeed.vue'
 import ActionUrlHandler from './views/user/ActionUrlHandler.vue'
 import Search from './views/search/Search.vue'
 import Profile from './views/user/Profile.vue'
@@ -35,10 +35,10 @@ export default [
         component : Join,
     },
     {
-        path : '/feed/main',
-        name : 'Feed',
+        path : '/newsfeed/main',
+        name : 'NewsFeed',
         meta : {title: '피드'},
-        component : Feed
+        component : NewsFeed
     },
     {
         path : '/user/find',
