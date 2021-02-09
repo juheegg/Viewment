@@ -35,7 +35,7 @@
       <Feed 
         feed-type="recommanded" 
       />
-      
+
     </v-col>
   </v-row>
 </template>
@@ -70,10 +70,11 @@ export default {
     }
   },
   created() {
-    // this.fetchData()
+    this.fetchData()
   },
   methods: {
     fetchData() {
+      this.loading = false
     },
   },
 }
