@@ -19,7 +19,7 @@
 
 
 
-    <div id="map" class="map" position: fixed style="z-index: 0">
+    <div id="map" class="map" style="z-index: 0">
     </div>
 
     <!-- dialog -->

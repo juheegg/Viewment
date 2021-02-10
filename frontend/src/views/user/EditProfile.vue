@@ -215,6 +215,7 @@ export default {
 
           // 기존에 프로필 이미지가 있었던 유저라면
           if (this.profileUserInfo.profileImage) {
+            console.log(this.profileImageFile)
             axios.put(`${SERVER_URL}/images/${this.profileUserInfo.profileImage.path}`, this.profileImageFile, config)
             .then(() => {
               this.goProfile()
@@ -224,6 +225,7 @@ export default {
             })
           // 기존에 프로필 이미지가 없었던 유저라면
           } else {
+            console.log(this.profileImageFile)
             axios.post(`${SERVER_URL}/images/profile/${this.profileUserId}`, this.profileImageFile, config)
             .then(() => {
               this.goProfile()

@@ -117,6 +117,7 @@ export default {
         this.articleLikeUsers.push(...res.data.content)
         this.page += 1
         this.last = res.data.last
+        console.log(this.articleLikeUsers)
       })
       .then(() => {
         this.loading = false
@@ -148,8 +149,8 @@ export default {
       if (confirm("삭제하시겠습니까?")) {
         axios.delete(`${SERVER_URL}/users/${this.loginUserId}/followers/${targetUser.userId}`, this.getToken)
         .then(() => {
-        const targetUserIdx = this.followers.indexOf(targetUser)
-        this.followers.splice(targetUserIdx, 1)
+        const targetUserIdx = this.articleLikeUsers.indexOf(targetUser)
+        this.articleLikeUsers.splice(targetUserIdx, 1)
         })
         .catch(err => {
           alert("오류"); // TODO: 오류페이지로 변경
@@ -160,12 +161,12 @@ export default {
     },
     // 팔로우/언팔로우 메서드
     onFollowButton (targetUser) {
-      const targetUserIdx = this.followers.indexOf(targetUser)
+      const targetUserIdx = this.articleLikeUsers.indexOf(targetUser)
       
       if (targetUser.followed) {
         axios.delete(`${SERVER_URL}/users/${this.loginUserId}/followings/${targetUser.userId}`, this.getToken)
         .then(() => {
-          this.followers[targetUserIdx].followed = !this.followers[targetUserIdx].followed
+          this.articleLikeUsers[targetUserIdx].followed = !this.articleLikeUsers[targetUserIdx].followed
         })
         .catch(err => {
           alert("오류"); // TODO: 오류페이지로 변경
@@ -176,7 +177,7 @@ export default {
         var params = {'targetUserId' : targetUser.userId }
         axios.post(`${SERVER_URL}/users/${this.loginUserId}/follow`, params, this.getToken)
         .then(() => {
-          this.followers[targetUserIdx].followed = !this.followers[targetUserIdx].followed 
+          this.articleLikeUsers[targetUserIdx].followed = !this.articleLikeUsers[targetUserIdx].followed 
         })
         .catch(err => {
           alert("오류"); // TODO: 오류페이지로 변경
